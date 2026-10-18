@@ -2,10 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>body{margin:0}</style>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>La La Land Varsity</title>
-<meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
 <style>
@@ -23,7 +21,9 @@
 :root[data-theme="dark"]{
   --bg:#0e1322; --surface:#161d31; --ink:#e8ebf3; --muted:#9aa3b8; --line:#283150;
   --accent:#f08a35; --accent-soft:#3a2a1c; --bar:#7f97d6; color-scheme:dark}
-body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.5}
+[hidden]{display:none!important}
 .wrap{max-width:980px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 56px;display:grid;gap:36px}
 h1,h2{font-family:var(--display);letter-spacing:.01em;text-wrap:balance;margin:0;line-height:1}
 h1{font-size:clamp(44px,9vw,84px);font-weight:800;text-transform:uppercase}
@@ -38,7 +38,6 @@ header{display:grid;gap:8px;border-bottom:3px solid var(--ink);padding-bottom:20
 @media (max-width:620px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
 section{display:grid;gap:14px}
 .sub{color:var(--muted);margin:0;max-width:65ch}
-/* payroll */
 .pay{display:grid;gap:8px}
 .prow{display:grid;grid-template-columns:minmax(0,190px) 1fr 70px;gap:10px;align-items:center;font-size:14px;background:none;border:0;padding:4px 6px;margin:0 -6px;border-radius:4px;color:inherit;font-family:inherit;text-align:left;cursor:pointer}
 .prow:hover,.prow:focus-visible{background:var(--surface);outline:none}
@@ -50,7 +49,6 @@ section{display:grid;gap:14px}
 .amt{font-family:var(--mono);text-align:right;font-variant-numeric:tabular-nums}
 .left{font-size:11px;color:var(--accent);display:block}
 @media (max-width:520px){.prow{grid-template-columns:minmax(0,120px) 1fr 58px}}
-/* roster */
 .chips{display:flex;flex-wrap:wrap;gap:6px}
 .chip{border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:6px 11px;border-radius:999px;font:500 13px var(--body);cursor:pointer}
 .chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
@@ -67,20 +65,18 @@ tr:last-child td{border-bottom:0}
 tfoot td{font-weight:600;border-top:2px solid var(--ink)}
 .team-cell{color:var(--muted)}
 .empty{padding:18px;color:var(--muted)}
-/* rules */
 .rules{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
 @media (max-width:720px){.rules{grid-template-columns:1fr}}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:18px 20px;display:grid;gap:10px;min-width:0}
 .card h3{margin:0;font-family:var(--display);font-size:22px;text-transform:uppercase;font-weight:800}
 .card ul{margin:0;padding-left:18px;display:grid;gap:6px}
-.kv{display:grid;grid-template-columns:auto auto;justify-content:space-between;gap:6px 16px;font-size:14px}
+.kv{display:grid;grid-template-columns:auto auto;justify-content:space-between;gap:6px 16px;font-size:14px;margin:0}
 .kv dd{margin:0;font-family:var(--mono);text-align:right}
 .kv dt{color:var(--muted)}
 .formula{font-family:var(--mono);background:var(--accent-soft);padding:10px 12px;border-radius:4px;font-size:13px}
 footer{color:var(--muted);font-size:13px;border-top:1px solid var(--line);padding-top:16px}
 @media (prefers-reduced-motion:no-preference){.fill{transition:width .5s ease}}
 </style>
-
 </head>
 <body>
 <div class="wrap">
@@ -157,42 +153,211 @@ footer{color:var(--muted);font-size:13px;border-top:1px solid var(--line);paddin
 <footer>Salaries from Yahoo's official draft results, Sun Oct 18, 2026. Questions go to the commissioner (Siesta in Gitmo).</footer>
 </div>
 
+<!-- Salary data: one line per player (Pick,Player,Salary,Team). Edit a line here when a salary or team changes. -->
+<script type="text/csv" id="salaries">
+1,Cooper Flagg,41,DrinkinBoozeSinkin2z
+2,Nikola Jokić,65,The Professor
+3,Tyrese Haliburton,40,I Thought We Were Up
+4,Shai Gilgeous-Alexander,62,Weber Bahia
+5,Victor Wembanyama,75,The Professor
+6,Scottie Barnes,45,Weber Bahia
+7,Luka Dončić,62,Hamza kabobs
+8,Trae Young,25,DrinkinBoozeSinkin2z
+9,Tyrese Maxey,43,Tomahawk Layup
+10,Jayson Tatum,41,Hamza kabobs
+11,Giannis Antetokounmpo,38,Siesta in Gitmo
+12,Cade Cunningham,47,DrinkinBoozeSinkin2z
+13,Anthony Edwards,46,SmokinTreesStrokin3s
+14,Bam Adebayo,29,Weber Bahia
+15,Donovan Mitchell,35,Mamba Brigade
+16,Evan Mobley,28,Weber Bahia
+17,Austin Reaves,26,Tank for Wemby
+18,Stephen Curry,28,Siesta in Gitmo
+19,LaMelo Ball,22,I Thought We Were Up
+20,James Harden,14,Tomahawk Layup
+21,Karl-Anthony Towns,33,Mamba Brigade
+22,Jalen Johnson,40,SmokinTreesStrokin3s
+23,Devin Booker,17,The Professor
+24,Anthony Davis,16,Mamba Brigade
+25,Jamal Murray,33,Siesta in Gitmo
+26,Alperen Şengün,27,Siesta in Gitmo
+27,Kevin Durant,25,SmokinTreesStrokin3s
+28,Jalen Brunson,25,Mamba Brigade
+29,Deni Avdija,24,Weber Bahia
+30,Josh Giddey,21,Mamba Brigade
+31,LeBron James,10,Tank for Wemby
+32,Amen Thompson,31,Tank for Wemby
+33,Walker Kessler,17,DrinkinBoozeSinkin2z
+34,Dyson Daniels,22,Tomahawk Layup
+35,Kyrie Irving,16,Siesta in Gitmo
+36,Brandin Podziemski,4,Tank for Wemby
+37,Chet Holmgren,19,Siesta in Gitmo
+38,Lauri Markkanen,22,Mamba Brigade
+39,Jalen Duren,21,Hamza kabobs
+40,Trey Murphy III,25,SmokinTreesStrokin3s
+41,Jaylen Brown,24,Hamza kabobs
+42,Derrick White,28,Mamba Brigade
+43,Onyeka Okongwu,17,I Thought We Were Up
+44,Pascal Siakam,15,Tank for Wemby
+45,Kawhi Leonard,17,I Thought We Were Up
+46,Domantas Sabonis,16,Tank for Wemby
+47,Jaren Jackson Jr.,27,I Thought We Were Up
+48,Brandon Miller,21,Tomahawk Layup
+49,Cameron Boozer,17,Siesta in Gitmo
+50,Ryan Rollins,8,Tank for Wemby
+51,Paolo Banchero,23,Hamza kabobs
+52,Joel Embiid,10,Siesta in Gitmo
+53,Michael Porter Jr.,9,Tank for Wemby
+54,Julius Randle,10,Tank for Wemby
+55,Darius Garland,16,Tomahawk Layup
+56,Jalen Williams,21,Tomahawk Layup
+57,Donovan Clingan,13,I Thought We Were Up
+58,Keyonte George,14,The Professor
+59,Desmond Bane,16,Tank for Wemby
+60,Franz Wagner,13,Tank for Wemby
+61,Kon Knueppel,17,DrinkinBoozeSinkin2z
+62,Damian Lillard,7,DrinkinBoozeSinkin2z
+63,Draymond Green,1,Siesta in Gitmo
+64,Kel'el Ware,20,Tomahawk Layup
+65,Ivica Zubac,9,Tomahawk Layup
+66,Matas Buzelis,18,DrinkinBoozeSinkin2z
+67,Dejounte Murray,8,Hamza kabobs
+68,Nickeil Alexander-Walker,19,Tomahawk Layup
+69,Stephon Castle,16,SmokinTreesStrokin3s
+70,Alex Sarr,6,DrinkinBoozeSinkin2z
+71,Tyler Herro,9,Tank for Wemby
+72,Ausar Thompson,8,DrinkinBoozeSinkin2z
+73,OG Anunoby,9,I Thought We Were Up
+74,Naz Reid,13,SmokinTreesStrokin3s
+75,De'Aaron Fox,9,SmokinTreesStrokin3s
+76,Collin Murray-Boyles,6,DrinkinBoozeSinkin2z
+77,Zach Edey,4,Tank for Wemby
+78,Rudy Gobert,3,Tomahawk Layup
+79,AJ Dybantsa,5,Tomahawk Layup
+80,Mikal Bridges,8,SmokinTreesStrokin3s
+81,Darryn Peterson,3,The Professor
+82,Zion Williamson,7,Hamza kabobs
+83,Jaden McDaniels,7,I Thought We Were Up
+84,Payton Pritchard,4,Tank for Wemby
+85,Cedric Coward,5,The Professor
+86,Jarrett Allen,5,SmokinTreesStrokin3s
+87,Paul George,13,I Thought We Were Up
+88,Dylan Harper,9,Mamba Brigade
+89,Reed Sheppard,1,SmokinTreesStrokin3s
+90,Myles Turner,4,I Thought We Were Up
+91,Caleb Wilson,7,I Thought We Were Up
+92,Ja Morant,4,Mamba Brigade
+93,Fred VanVleet,8,I Thought We Were Up
+94,Cason Wallace,3,Tank for Wemby
+95,VJ Edgecombe,7,The Professor
+96,Ty Jerome,4,DrinkinBoozeSinkin2z
+97,Coby White,4,I Thought We Were Up
+98,Neemias Queta,4,Tomahawk Layup
+99,Jalen Green,4,Hamza kabobs
+100,DeMar DeRozan,3,Weber Bahia
+101,Jalen Suggs,6,I Thought We Were Up
+102,Zach LaVine,3,Hamza kabobs
+103,Josh Hart,3,Siesta in Gitmo
+104,Ace Bailey,5,The Professor
+105,Immanuel Quickley,2,Siesta in Gitmo
+106,Norman Powell,3,Siesta in Gitmo
+107,Miles Bridges,3,The Professor
+108,Jeremiah Fears,1,SmokinTreesStrokin3s
+109,Brandon Ingram,2,Mamba Brigade
+110,Anthony Black,3,I Thought We Were Up
+111,Jabari Smith Jr.,1,Hamza kabobs
+112,Toumani Camara,2,SmokinTreesStrokin3s
+113,Keaton Wagler,1,The Professor
+114,Day'Ron Sharpe,2,SmokinTreesStrokin3s
+115,Andrew Wiggins,1,Mamba Brigade
+116,CJ McCollum,2,Hamza kabobs
+117,Yaxel Lendeborg,1,SmokinTreesStrokin3s
+118,Rui Hachimura,1,Weber Bahia
+119,John Collins,1,Hamza kabobs
+120,Tari Eason,1,Siesta in Gitmo
+121,Nic Claxton,1,The Professor
+122,Derik Queen,1,DrinkinBoozeSinkin2z
+123,Keegan Murray,1,Mamba Brigade
+124,Andre Drummond,1,Tomahawk Layup
+125,Jonathan Kuminga,1,SmokinTreesStrokin3s
+126,Isaiah Hartenstein,1,Weber Bahia
+127,RJ Barrett,1,Hamza kabobs
+128,Herbert Jones,1,Siesta in Gitmo
+129,Darius Acuff Jr.,1,The Professor
+130,Wendell Carter Jr.,1,DrinkinBoozeSinkin2z
+131,Ayo Dosunmu,1,Mamba Brigade
+132,Kevin Porter Jr.,1,Tomahawk Layup
+133,Andrew Nembhard,1,Weber Bahia
+134,Dillon Brooks,1,Hamza kabobs
+135,Peyton Watson,1,Siesta in Gitmo
+136,Aaron Gordon,1,The Professor
+137,Sandro Mamukelashvili,1,DrinkinBoozeSinkin2z
+138,Khaman Maluach,1,Mamba Brigade
+139,Jimmy Butler III,1,Tomahawk Layup
+140,Davion Mitchell,1,Weber Bahia
+141,P.J. Washington,1,Hamza kabobs
+142,Ajay Mitchell,1,The Professor
+143,Mark Williams,1,DrinkinBoozeSinkin2z
+144,Collin Gillespie,1,Mamba Brigade
+145,Jakob Poeltl,1,Weber Bahia
+146,Grayson Allen,1,The Professor
+147,Kyshawn George,1,Weber Bahia
+148,Quentin Grimes,1,Weber Bahia
+149,Daniel Gafford,1,Weber Bahia
+150,Yves Missi,1,Weber Bahia
+</script>
+
 <script>
-const DATA=[{"n": "Cooper Flagg", "p": 41, "t": "DrinkinBoozeSinkin2z", "k": 1}, {"n": "Nikola Jokić", "p": 65, "t": "The Professor", "k": 2}, {"n": "Tyrese Haliburton", "p": 40, "t": "I Thought We Were Up", "k": 3}, {"n": "Shai Gilgeous-Alexander", "p": 62, "t": "Weber Bahia", "k": 4}, {"n": "Victor Wembanyama", "p": 75, "t": "The Professor", "k": 5}, {"n": "Scottie Barnes", "p": 45, "t": "Weber Bahia", "k": 6}, {"n": "Luka Dončić", "p": 62, "t": "Hamza kabobs", "k": 7}, {"n": "Trae Young", "p": 25, "t": "DrinkinBoozeSinkin2z", "k": 8}, {"n": "Tyrese Maxey", "p": 43, "t": "Tomahawk Layup", "k": 9}, {"n": "Jayson Tatum", "p": 41, "t": "Hamza kabobs", "k": 10}, {"n": "Giannis Antetokounmpo", "p": 38, "t": "Siesta in Gitmo", "k": 11}, {"n": "Cade Cunningham", "p": 47, "t": "DrinkinBoozeSinkin2z", "k": 12}, {"n": "Anthony Edwards", "p": 46, "t": "SmokinTreesStrokin3s", "k": 13}, {"n": "Bam Adebayo", "p": 29, "t": "Weber Bahia", "k": 14}, {"n": "Donovan Mitchell", "p": 35, "t": "Mamba Brigade", "k": 15}, {"n": "Evan Mobley", "p": 28, "t": "Weber Bahia", "k": 16}, {"n": "Austin Reaves", "p": 26, "t": "Tank for Wemby", "k": 17}, {"n": "Stephen Curry", "p": 28, "t": "Siesta in Gitmo", "k": 18}, {"n": "LaMelo Ball", "p": 22, "t": "I Thought We Were Up", "k": 19}, {"n": "James Harden", "p": 14, "t": "Tomahawk Layup", "k": 20}, {"n": "Karl-Anthony Towns", "p": 33, "t": "Mamba Brigade", "k": 21}, {"n": "Jalen Johnson", "p": 40, "t": "SmokinTreesStrokin3s", "k": 22}, {"n": "Devin Booker", "p": 17, "t": "The Professor", "k": 23}, {"n": "Anthony Davis", "p": 16, "t": "Mamba Brigade", "k": 24}, {"n": "Jamal Murray", "p": 33, "t": "Siesta in Gitmo", "k": 25}, {"n": "Alperen Şengün", "p": 27, "t": "Siesta in Gitmo", "k": 26}, {"n": "Kevin Durant", "p": 25, "t": "SmokinTreesStrokin3s", "k": 27}, {"n": "Jalen Brunson", "p": 25, "t": "Mamba Brigade", "k": 28}, {"n": "Deni Avdija", "p": 24, "t": "Weber Bahia", "k": 29}, {"n": "Josh Giddey", "p": 21, "t": "Mamba Brigade", "k": 30}, {"n": "LeBron James", "p": 10, "t": "Tank for Wemby", "k": 31}, {"n": "Amen Thompson", "p": 31, "t": "Tank for Wemby", "k": 32}, {"n": "Walker Kessler", "p": 17, "t": "DrinkinBoozeSinkin2z", "k": 33}, {"n": "Dyson Daniels", "p": 22, "t": "Tomahawk Layup", "k": 34}, {"n": "Kyrie Irving", "p": 16, "t": "Siesta in Gitmo", "k": 35}, {"n": "Brandin Podziemski", "p": 4, "t": "Tank for Wemby", "k": 36}, {"n": "Chet Holmgren", "p": 19, "t": "Siesta in Gitmo", "k": 37}, {"n": "Lauri Markkanen", "p": 22, "t": "Mamba Brigade", "k": 38}, {"n": "Jalen Duren", "p": 21, "t": "Hamza kabobs", "k": 39}, {"n": "Trey Murphy III", "p": 25, "t": "SmokinTreesStrokin3s", "k": 40}, {"n": "Jaylen Brown", "p": 24, "t": "Hamza kabobs", "k": 41}, {"n": "Derrick White", "p": 28, "t": "Mamba Brigade", "k": 42}, {"n": "Onyeka Okongwu", "p": 17, "t": "I Thought We Were Up", "k": 43}, {"n": "Pascal Siakam", "p": 15, "t": "Tank for Wemby", "k": 44}, {"n": "Kawhi Leonard", "p": 17, "t": "I Thought We Were Up", "k": 45}, {"n": "Domantas Sabonis", "p": 16, "t": "Tank for Wemby", "k": 46}, {"n": "Jaren Jackson Jr.", "p": 27, "t": "I Thought We Were Up", "k": 47}, {"n": "Brandon Miller", "p": 21, "t": "Tomahawk Layup", "k": 48}, {"n": "Cameron Boozer", "p": 17, "t": "Siesta in Gitmo", "k": 49}, {"n": "Ryan Rollins", "p": 8, "t": "Tank for Wemby", "k": 50}, {"n": "Paolo Banchero", "p": 23, "t": "Hamza kabobs", "k": 51}, {"n": "Joel Embiid", "p": 10, "t": "Siesta in Gitmo", "k": 52}, {"n": "Michael Porter Jr.", "p": 9, "t": "Tank for Wemby", "k": 53}, {"n": "Julius Randle", "p": 10, "t": "Tank for Wemby", "k": 54}, {"n": "Darius Garland", "p": 16, "t": "Tomahawk Layup", "k": 55}, {"n": "Jalen Williams", "p": 21, "t": "Tomahawk Layup", "k": 56}, {"n": "Donovan Clingan", "p": 13, "t": "I Thought We Were Up", "k": 57}, {"n": "Keyonte George", "p": 14, "t": "The Professor", "k": 58}, {"n": "Desmond Bane", "p": 16, "t": "Tank for Wemby", "k": 59}, {"n": "Franz Wagner", "p": 13, "t": "Tank for Wemby", "k": 60}, {"n": "Kon Knueppel", "p": 17, "t": "DrinkinBoozeSinkin2z", "k": 61}, {"n": "Damian Lillard", "p": 7, "t": "DrinkinBoozeSinkin2z", "k": 62}, {"n": "Draymond Green", "p": 1, "t": "Siesta in Gitmo", "k": 63}, {"n": "Kel'el Ware", "p": 20, "t": "Tomahawk Layup", "k": 64}, {"n": "Ivica Zubac", "p": 9, "t": "Tomahawk Layup", "k": 65}, {"n": "Matas Buzelis", "p": 18, "t": "DrinkinBoozeSinkin2z", "k": 66}, {"n": "Dejounte Murray", "p": 8, "t": "Hamza kabobs", "k": 67}, {"n": "Nickeil Alexander-Walker", "p": 19, "t": "Tomahawk Layup", "k": 68}, {"n": "Stephon Castle", "p": 16, "t": "SmokinTreesStrokin3s", "k": 69}, {"n": "Alex Sarr", "p": 6, "t": "DrinkinBoozeSinkin2z", "k": 70}, {"n": "Tyler Herro", "p": 9, "t": "Tank for Wemby", "k": 71}, {"n": "Ausar Thompson", "p": 8, "t": "DrinkinBoozeSinkin2z", "k": 72}, {"n": "OG Anunoby", "p": 9, "t": "I Thought We Were Up", "k": 73}, {"n": "Naz Reid", "p": 13, "t": "SmokinTreesStrokin3s", "k": 74}, {"n": "De'Aaron Fox", "p": 9, "t": "SmokinTreesStrokin3s", "k": 75}, {"n": "Collin Murray-Boyles", "p": 6, "t": "DrinkinBoozeSinkin2z", "k": 76}, {"n": "Zach Edey", "p": 4, "t": "Tank for Wemby", "k": 77}, {"n": "Rudy Gobert", "p": 3, "t": "Tomahawk Layup", "k": 78}, {"n": "AJ Dybantsa", "p": 5, "t": "Tomahawk Layup", "k": 79}, {"n": "Mikal Bridges", "p": 8, "t": "SmokinTreesStrokin3s", "k": 80}, {"n": "Darryn Peterson", "p": 3, "t": "The Professor", "k": 81}, {"n": "Zion Williamson", "p": 7, "t": "Hamza kabobs", "k": 82}, {"n": "Jaden McDaniels", "p": 7, "t": "I Thought We Were Up", "k": 83}, {"n": "Payton Pritchard", "p": 4, "t": "Tank for Wemby", "k": 84}, {"n": "Cedric Coward", "p": 5, "t": "The Professor", "k": 85}, {"n": "Jarrett Allen", "p": 5, "t": "SmokinTreesStrokin3s", "k": 86}, {"n": "Paul George", "p": 13, "t": "I Thought We Were Up", "k": 87}, {"n": "Dylan Harper", "p": 9, "t": "Mamba Brigade", "k": 88}, {"n": "Reed Sheppard", "p": 1, "t": "SmokinTreesStrokin3s", "k": 89}, {"n": "Myles Turner", "p": 4, "t": "I Thought We Were Up", "k": 90}, {"n": "Caleb Wilson", "p": 7, "t": "I Thought We Were Up", "k": 91}, {"n": "Ja Morant", "p": 4, "t": "Mamba Brigade", "k": 92}, {"n": "Fred VanVleet", "p": 8, "t": "I Thought We Were Up", "k": 93}, {"n": "Cason Wallace", "p": 3, "t": "Tank for Wemby", "k": 94}, {"n": "VJ Edgecombe", "p": 7, "t": "The Professor", "k": 95}, {"n": "Ty Jerome", "p": 4, "t": "DrinkinBoozeSinkin2z", "k": 96}, {"n": "Coby White", "p": 4, "t": "I Thought We Were Up", "k": 97}, {"n": "Neemias Queta", "p": 4, "t": "Tomahawk Layup", "k": 98}, {"n": "Jalen Green", "p": 4, "t": "Hamza kabobs", "k": 99}, {"n": "DeMar DeRozan", "p": 3, "t": "Weber Bahia", "k": 100}, {"n": "Jalen Suggs", "p": 6, "t": "I Thought We Were Up", "k": 101}, {"n": "Zach LaVine", "p": 3, "t": "Hamza kabobs", "k": 102}, {"n": "Josh Hart", "p": 3, "t": "Siesta in Gitmo", "k": 103}, {"n": "Ace Bailey", "p": 5, "t": "The Professor", "k": 104}, {"n": "Immanuel Quickley", "p": 2, "t": "Siesta in Gitmo", "k": 105}, {"n": "Norman Powell", "p": 3, "t": "Siesta in Gitmo", "k": 106}, {"n": "Miles Bridges", "p": 3, "t": "The Professor", "k": 107}, {"n": "Jeremiah Fears", "p": 1, "t": "SmokinTreesStrokin3s", "k": 108}, {"n": "Brandon Ingram", "p": 2, "t": "Mamba Brigade", "k": 109}, {"n": "Anthony Black", "p": 3, "t": "I Thought We Were Up", "k": 110}, {"n": "Jabari Smith Jr.", "p": 1, "t": "Hamza kabobs", "k": 111}, {"n": "Toumani Camara", "p": 2, "t": "SmokinTreesStrokin3s", "k": 112}, {"n": "Keaton Wagler", "p": 1, "t": "The Professor", "k": 113}, {"n": "Day'Ron Sharpe", "p": 2, "t": "SmokinTreesStrokin3s", "k": 114}, {"n": "Andrew Wiggins", "p": 1, "t": "Mamba Brigade", "k": 115}, {"n": "CJ McCollum", "p": 2, "t": "Hamza kabobs", "k": 116}, {"n": "Yaxel Lendeborg", "p": 1, "t": "SmokinTreesStrokin3s", "k": 117}, {"n": "Rui Hachimura", "p": 1, "t": "Weber Bahia", "k": 118}, {"n": "John Collins", "p": 1, "t": "Hamza kabobs", "k": 119}, {"n": "Tari Eason", "p": 1, "t": "Siesta in Gitmo", "k": 120}, {"n": "Nic Claxton", "p": 1, "t": "The Professor", "k": 121}, {"n": "Derik Queen", "p": 1, "t": "DrinkinBoozeSinkin2z", "k": 122}, {"n": "Keegan Murray", "p": 1, "t": "Mamba Brigade", "k": 123}, {"n": "Andre Drummond", "p": 1, "t": "Tomahawk Layup", "k": 124}, {"n": "Jonathan Kuminga", "p": 1, "t": "SmokinTreesStrokin3s", "k": 125}, {"n": "Isaiah Hartenstein", "p": 1, "t": "Weber Bahia", "k": 126}, {"n": "RJ Barrett", "p": 1, "t": "Hamza kabobs", "k": 127}, {"n": "Herbert Jones", "p": 1, "t": "Siesta in Gitmo", "k": 128}, {"n": "Darius Acuff Jr.", "p": 1, "t": "The Professor", "k": 129}, {"n": "Wendell Carter Jr.", "p": 1, "t": "DrinkinBoozeSinkin2z", "k": 130}, {"n": "Ayo Dosunmu", "p": 1, "t": "Mamba Brigade", "k": 131}, {"n": "Kevin Porter Jr.", "p": 1, "t": "Tomahawk Layup", "k": 132}, {"n": "Andrew Nembhard", "p": 1, "t": "Weber Bahia", "k": 133}, {"n": "Dillon Brooks", "p": 1, "t": "Hamza kabobs", "k": 134}, {"n": "Peyton Watson", "p": 1, "t": "Siesta in Gitmo", "k": 135}, {"n": "Aaron Gordon", "p": 1, "t": "The Professor", "k": 136}, {"n": "Sandro Mamukelashvili", "p": 1, "t": "DrinkinBoozeSinkin2z", "k": 137}, {"n": "Khaman Maluach", "p": 1, "t": "Mamba Brigade", "k": 138}, {"n": "Jimmy Butler III", "p": 1, "t": "Tomahawk Layup", "k": 139}, {"n": "Davion Mitchell", "p": 1, "t": "Weber Bahia", "k": 140}, {"n": "P.J. Washington", "p": 1, "t": "Hamza kabobs", "k": 141}, {"n": "Ajay Mitchell", "p": 1, "t": "The Professor", "k": 142}, {"n": "Mark Williams", "p": 1, "t": "DrinkinBoozeSinkin2z", "k": 143}, {"n": "Collin Gillespie", "p": 1, "t": "Mamba Brigade", "k": 144}, {"n": "Jakob Poeltl", "p": 1, "t": "Weber Bahia", "k": 145}, {"n": "Grayson Allen", "p": 1, "t": "The Professor", "k": 146}, {"n": "Kyshawn George", "p": 1, "t": "Weber Bahia", "k": 147}, {"n": "Quentin Grimes", "p": 1, "t": "Weber Bahia", "k": 148}, {"n": "Daniel Gafford", "p": 1, "t": "Weber Bahia", "k": 149}, {"n": "Yves Missi", "p": 1, "t": "Weber Bahia", "k": 150}];
+(function(){
+"use strict";
+const DATA=document.getElementById("salaries").textContent.trim().split("\n").map(line=>{
+  const parts=line.split(","), k=+parts[0], p=+parts[parts.length-2], t=parts[parts.length-1].trim(), n=parts.slice(1,-2).join(",").trim();
+  return {k,n,p,t};
+}).filter(d=>d.n&&d.t&&!isNaN(d.p));
 const TEAMS=[...new Set(DATA.map(d=>d.t))].sort((a,b)=>a.localeCompare(b));
 const $=s=>document.querySelector(s);
 const money=v=>"$"+v.toLocaleString();
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const fold=s=>s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"");
 let team="All", q="";
 try{const s=localStorage.getItem("llv-team"); if(s&&(s==="All"||TEAMS.includes(s))) team=s;}catch(e){}
+
 // stats
-const total=DATA.reduce((a,d)=>a+d.p,0), top=DATA.reduce((a,d)=>d.p>a.p?d:a), ones=DATA.filter(d=>d.p===1).length;
-$("#stats").innerHTML=[[DATA.length,"Players drafted"],[money(total),"Spent of $2,000"],[money(top.p),"Top salary · "+top.n.split(" ").slice(-1)[0]],[ones,"Players at $1"]]
- .map(([b,s])=>`<div class="stat"><b>${b}</b><span>${s}</span></div>`).join("");
+const total=DATA.reduce((a,d)=>a+d.p,0);
+const maxSal=DATA.reduce((a,d)=>d.p>a.p?d:a);
+const ones=DATA.filter(d=>d.p===1).length;
+$("#stats").innerHTML=[[DATA.length,"Players drafted"],[money(total),"Spent of $"+(TEAMS.length*200).toLocaleString()],[money(maxSal.p),"Top salary · "+maxSal.n.split(" ").slice(-1)[0]],[ones,"Players at $1"]]
+  .map(([b,s])=>`<div class="stat"><b>${esc(b)}</b><span>${esc(s)}</span></div>`).join("");
+
 // payroll
 const spend=TEAMS.map(t=>({t,s:DATA.filter(d=>d.t===t).reduce((a,d)=>a+d.p,0)})).sort((a,b)=>b.s-a.s);
 function renderPay(){
-  $("#pay").innerHTML=spend.map(x=>`<button class="prow${team===x.t?" on":""}" data-t="${x.t}" aria-pressed="${team===x.t}">
-   <span class="nm">${x.t}</span><span class="track"><span class="fill" style="width:${x.s/200*100}%"></span></span>
+  $("#pay").innerHTML=spend.map(x=>`<button type="button" class="prow${team===x.t?" on":""}" data-t="${esc(x.t)}" aria-pressed="${team===x.t}">
+   <span class="nm">${esc(x.t)}</span><span class="track"><span class="fill" style="width:${Math.min(100,x.s/200*100)}%"></span></span>
    <span class="amt">${money(x.s)}${x.s<200?`<span class="left">$${200-x.s} unspent</span>`:""}</span></button>`).join("");
-  document.querySelectorAll(".prow").forEach(b=>b.onclick=()=>{setTeam(team===b.dataset.t?"All":b.dataset.t);document.getElementById("rosters").scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"})});
+  document.querySelectorAll(".prow").forEach(b=>b.addEventListener("click",()=>{
+    setTeam(team===b.dataset.t?"All":b.dataset.t);
+    document.getElementById("rosters").scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});
+  }));
 }
 function renderChips(){
-  $("#chips").innerHTML=["All",...TEAMS].map(t=>`<button class="chip" aria-pressed="${team===t}" data-t="${t}">${t==="All"?"All teams":t}</button>`).join("");
-  document.querySelectorAll(".chip").forEach(b=>b.onclick=()=>setTeam(b.dataset.t));
+  $("#chips").innerHTML=["All",...TEAMS].map(t=>`<button type="button" class="chip" aria-pressed="${team===t}" data-t="${esc(t)}">${t==="All"?"All teams":esc(t)}</button>`).join("");
+  document.querySelectorAll(".chip").forEach(b=>b.addEventListener("click",()=>setTeam(b.dataset.t)));
 }
 function renderTable(){
-  const ql=q.trim().toLowerCase();
-  let rows=DATA.filter(d=>(team==="All"||d.t===team)&&(!ql||d.n.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").includes(ql.normalize("NFD").replace(/[̀-ͯ]/g,""))));
+  const ql=fold(q.trim());
+  const rows=DATA.filter(d=>(team==="All"||d.t===team)&&(!ql||fold(d.n).includes(ql)));
   rows.sort((a,b)=>b.p-a.p||a.k-b.k);
   const showTeam=team==="All"; $("#th-team").hidden=!showTeam;
-  $("#tb").innerHTML=rows.length?rows.map(d=>`<tr><td>${d.n}</td>${showTeam?`<td class="team-cell">${d.t}</td>`:""}<td class="num">${money(d.p)}</td><td class="num">${money(d.p+5)}</td></tr>`).join("")
-    :`<tr><td class="empty" colspan="4">No player matches “${q}”. Check the spelling, or pick All teams.</td></tr>`;
-  if(team!=="All"&&!ql){const s=rows.reduce((a,d)=>a+d.p,0);$("#tf").innerHTML=`<tr><td>${rows.length} players</td><td class="num">${money(s)}</td><td class="num"></td></tr>`}else $("#tf").innerHTML="";
+  $("#tb").innerHTML=rows.length?rows.map(d=>`<tr><td>${esc(d.n)}</td>${showTeam?`<td class="team-cell">${esc(d.t)}</td>`:""}<td class="num">${money(d.p)}</td><td class="num">${money(d.p+5)}</td></tr>`).join("")
+    :`<tr><td class="empty" colspan="4">No player matches “${esc(q)}”. Check the spelling, or pick All teams.</td></tr>`;
+  if(team!=="All"&&!ql){const s=rows.reduce((a,d)=>a+d.p,0);$("#tf").innerHTML=`<tr><td>${rows.length} players</td><td class="num">${money(s)}</td><td class="num"></td></tr>`;}
+  else $("#tf").innerHTML="";
 }
-function setTeam(t){team=t;try{localStorage.setItem("llv-team",t)}catch(e){};renderPay();renderChips();renderTable()}
-$("#q").addEventListener("input",e=>{q=e.target.value;renderTable()});
+function setTeam(t){team=t;try{localStorage.setItem("llv-team",t)}catch(e){} renderPay();renderChips();renderTable();}
+$("#q").addEventListener("input",e=>{q=e.target.value;renderTable();});
 renderPay();renderChips();renderTable();
+})();
 </script>
-
 </body>
 </html>
